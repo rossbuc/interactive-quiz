@@ -1,26 +1,25 @@
+import  Answers from '../components/Answers'
+
 const QuestionContainer = ({questions, currentQuestionIndex, selectedAnswer, setSelectedAnswer, handleAnswer, endOfQuiz}) => {
-    
-    const answers = (currentQuestionIndex == (questions.length)) 
-        ? endOfQuiz() 
-        : questions[currentQuestionIndex].options.map((option, index) => 
-            <div key={index}>
-                <label htmlFor={index}>{option}</label>
-                <input 
-                    type="radio" 
-                    id={index} 
-                    name="options" 
-                    checked={option ==  selectedAnswer} onChange={() => {setSelectedAnswer(option)}}>
-                </input>
-            </div>
-    )
+
+    const displayText = (currentQuestionIndex == (questions.length)) 
+    ? null 
+    : <div>
+        <h2>Question {currentQuestionIndex + 1}</h2>
+        <h3>{questions[currentQuestionIndex].question}</h3>
+    </div>
 
     return (
         <>
-            <h3>Current Question: {currentQuestionIndex +1}</h3>
-            <form id="answers">
-                {answers}
-                <button type="submit" onClick={handleAnswer}>Next Question</button>
-            </form>
+            {displayText}
+            <Answers 
+                currentQuestionIndex={currentQuestionIndex}
+                questions={questions} 
+                endOfQuiz={endOfQuiz} 
+                selectedAnswer={selectedAnswer} 
+                setSelectedAnswer={setSelectedAnswer} 
+                handleAnswer={handleAnswer}
+            />
         </>
     )
 }
