@@ -2,7 +2,6 @@ const Answer = ({index, option, selectedAnswer, setSelectedAnswer}) => {
 
     return (
         <div>
-            <label htmlFor={index}>{option}</label>
             <input 
                 type="radio" 
                 id={index} 
@@ -11,6 +10,7 @@ const Answer = ({index, option, selectedAnswer, setSelectedAnswer}) => {
                 required
                 onChange={() => {setSelectedAnswer(option)}}>
             </input>
+            <label htmlFor={index}>{option}</label>
         </div>
     )
     

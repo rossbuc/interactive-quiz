@@ -55,17 +55,19 @@ const QuizContainer = () => {
 
     return (
         <>
-            <h3>Score: {score}</h3>
-            <QuestionContainer 
-                questions={questions} 
-                currentQuestionIndex={currentQuestionIndex} 
-                selectedAnswer={selectedAnswer}
-                feedback={feedback} 
-                setSelectedAnswer={setSelectedAnswer} 
-                handleAnswer={handleAnswer} 
-                endOfQuiz={endOfQuiz}
-                setFeedback={setFeedback}
-            />
+            <div className="question-container">
+                <h3>Score: {score}</h3>
+                <QuestionContainer 
+                    questions={questions} 
+                    currentQuestionIndex={currentQuestionIndex} 
+                    selectedAnswer={selectedAnswer}
+                    feedback={feedback} 
+                    setSelectedAnswer={setSelectedAnswer} 
+                    handleAnswer={handleAnswer} 
+                    endOfQuiz={endOfQuiz}
+                    setFeedback={setFeedback}
+                />
+            </div>
         </>
     )
 }

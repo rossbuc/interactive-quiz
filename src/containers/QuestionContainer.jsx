@@ -5,7 +5,7 @@ const QuestionContainer = ({questions, currentQuestionIndex, selectedAnswer, fee
 
     const displayText = (currentQuestionIndex == (questions.length)) 
     ? null 
-    : <div>
+    : <div className="question--text">
         <h2>Question {currentQuestionIndex + 1}</h2>
         <h3>{questions[currentQuestionIndex].question}</h3>
     </div>
@@ -25,7 +25,7 @@ const QuestionContainer = ({questions, currentQuestionIndex, selectedAnswer, fee
     return (
         <>
             {displayText}
-            <form>
+            <form className="answers">
                 <Answers 
                     currentQuestionIndex={currentQuestionIndex}
                     questions={questions}
