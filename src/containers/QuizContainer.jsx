@@ -26,12 +26,20 @@ const QuizContainer = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [selectedAnswer, setSelectedAnswer] = useState("")
     const [score, setScore] = useState(0)
+    const [feedback, setFeedback] = useState("")
+
+    const resetQuiz = () => {
+        setCurrentQuestionIndex(0)
+        setSelectedAnswer("")
+        setScore(0)
+    }
 
     const endOfQuiz = () => {
         return (
             <>
                 <h2>Congratulations you've finished the quiz</h2>
                 <h2>Your score is {score}</h2>
+                <button onClick={resetQuiz}>Restart</button>
             </>
         )
     }
@@ -40,7 +48,10 @@ const QuizContainer = () => {
         event.preventDefault()
         setScore((selectedAnswer == questions[currentQuestionIndex].answer) ? score + 1 : score)
         setCurrentQuestionIndex(currentQuestionIndex + 1)
+        setFeedback("")
     }
+
+
 
     return (
         <>
@@ -48,10 +59,12 @@ const QuizContainer = () => {
             <QuestionContainer 
                 questions={questions} 
                 currentQuestionIndex={currentQuestionIndex} 
-                selectedAnswer={selectedAnswer} 
+                selectedAnswer={selectedAnswer}
+                feedback={feedback} 
                 setSelectedAnswer={setSelectedAnswer} 
                 handleAnswer={handleAnswer} 
                 endOfQuiz={endOfQuiz}
+                setFeedback={setFeedback}
             />
         </>
     )

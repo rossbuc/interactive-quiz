@@ -6,8 +6,9 @@ const Answer = ({index, option, selectedAnswer, setSelectedAnswer}) => {
             <input 
                 type="radio" 
                 id={index} 
-                name="options" 
-                checked={option ==  selectedAnswer} 
+                name="options"
+                checked={option ==  selectedAnswer}
+                required
                 onChange={() => {setSelectedAnswer(option)}}>
             </input>
         </div>

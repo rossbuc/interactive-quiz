@@ -1,6 +1,6 @@
 import Answer from '../components/Answer'
 
-const Answers = ({currentQuestionIndex, questions, endOfQuiz, selectedAnswer, setSelectedAnswer, handleAnswer}) => {
+const Answers = ({currentQuestionIndex, questions, endOfQuiz, selectedAnswer, setSelectedAnswer}) => {
 
     const answers = (currentQuestionIndex == (questions.length)) 
     ? endOfQuiz() 
@@ -9,10 +9,9 @@ const Answers = ({currentQuestionIndex, questions, endOfQuiz, selectedAnswer, se
     )
 
     return (
-        <form id="answers">
+        <>
             {answers}
-            <button type="submit" onClick={handleAnswer}>Next Question</button>
-        </form>
+        </>
     )
 }
 

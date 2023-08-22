@@ -1,6 +1,7 @@
 import  Answers from '../components/Answers'
+import {useState} from 'react'
 
-const QuestionContainer = ({questions, currentQuestionIndex, selectedAnswer, setSelectedAnswer, handleAnswer, endOfQuiz}) => {
+const QuestionContainer = ({questions, currentQuestionIndex, selectedAnswer, feedback, setSelectedAnswer, handleAnswer, endOfQuiz, setFeedback}) => {
 
     const displayText = (currentQuestionIndex == (questions.length)) 
     ? null 
@@ -9,17 +10,33 @@ const QuestionContainer = ({questions, currentQuestionIndex, selectedAnswer, set
         <h3>{questions[currentQuestionIndex].question}</h3>
     </div>
 
+    const nextQuestion = (currentQuestionIndex == (questions.length)) 
+    ? null 
+    : <div>
+        <button type="submit" onClick={handleAnswer}>Next Question</button>
+    </div>
+
+    const checkAnswer = () => {
+        (selectedAnswer == questions[currentQuestionIndex].answer) 
+        ? setFeedback(`✅ Correct Answer!`)
+        : setFeedback(`❌ Wrong Answer! The correct answer was ${questions[currentQuestionIndex].answer}`)
+    }
+
     return (
         <>
             {displayText}
-            <Answers 
-                currentQuestionIndex={currentQuestionIndex}
-                questions={questions} 
-                endOfQuiz={endOfQuiz} 
-                selectedAnswer={selectedAnswer} 
-                setSelectedAnswer={setSelectedAnswer} 
-                handleAnswer={handleAnswer}
-            />
+            <form>
+                <Answers 
+                    currentQuestionIndex={currentQuestionIndex}
+                    questions={questions}
+                    endOfQuiz={endOfQuiz} 
+                    selectedAnswer={selectedAnswer} 
+                    setSelectedAnswer={setSelectedAnswer}
+                />
+                {nextQuestion}
+            </form>
+            <button onClick={checkAnswer}>Check Answer</button>
+            {feedback}
         </>
     )
 }
