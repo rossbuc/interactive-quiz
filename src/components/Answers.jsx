@@ -1,18 +1,11 @@
+import Answer from '../components/Answer'
+
 const Answers = ({currentQuestionIndex, questions, endOfQuiz, selectedAnswer, setSelectedAnswer, handleAnswer}) => {
 
     const answers = (currentQuestionIndex == (questions.length)) 
     ? endOfQuiz() 
     : questions[currentQuestionIndex].options.map((option, index) => 
-        <div key={index}>
-            <label htmlFor={index}>{option}</label>
-            <input 
-                type="radio" 
-                id={index} 
-                name="options" 
-                checked={option ==  selectedAnswer} 
-                onChange={() => {setSelectedAnswer(option)}}>
-            </input>
-        </div>
+        <Answer key={index} option={option} selectedAnswer={selectedAnswer} setSelectedAnswer={setSelectedAnswer}/>
     )
 
     return (
