@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import Question from '../components/Question'
+import QuestionContainer from '../containers/QuestionContainer'
 
 const QuizContainer = () => {
 
@@ -26,7 +26,6 @@ const QuizContainer = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [selectedAnswer, setSelectedAnswer] = useState("")
     const [score, setScore] = useState(0)
-    // const [answers, setAnswers] = useState(questions[currentQuestionIndex])
 
     const endOfQuiz = () => {
         return (
@@ -36,41 +35,24 @@ const QuizContainer = () => {
             </>
         )
     }
-    
-    const answers = (currentQuestionIndex == (questions.length)) 
-        ? endOfQuiz() 
-        : questions[currentQuestionIndex].options.map((option, index) => 
-            <div key={index}>
-                <label htmlFor={index}>{option}</label>
-                <input type="radio" id={index} name="options" checked={option ==  selectedAnswer} onChange={() => {console.log(option);setSelectedAnswer(option);}}></input>
-            </div>
-    )
 
     const handleAnswer = (event) => {
         event.preventDefault()
-        // currentQuestionIndex == (questions.length - 1) ? endOfQuiz() : 
         setScore((selectedAnswer == questions[currentQuestionIndex].answer) ? score + 1 : score)
-        console.log(selectedAnswer)
-        console.log(questions[currentQuestionIndex].answer)
-        console.log((selectedAnswer == questions[currentQuestionIndex].answer))
         setCurrentQuestionIndex(currentQuestionIndex + 1)
-        // const answers = document.getElementById("answers")
-        // answers.reset()
     }
-
-    console.log(currentQuestionIndex)
-    console.log(questions.length)
-
-
 
     return (
         <>
             <h3>Score: {score}</h3>
-            <h3>Current Question: {currentQuestionIndex +1}</h3>
-            <form id="answers">
-                {answers}
-                <button type="submit" onClick={handleAnswer}>Next Question</button>
-            </form>
+            <QuestionContainer 
+                questions={questions} 
+                currentQuestionIndex={currentQuestionIndex} 
+                selectedAnswer={selectedAnswer} 
+                setSelectedAnswer={setSelectedAnswer} 
+                handleAnswer={handleAnswer} 
+                endOfQuiz={endOfQuiz}
+            />
         </>
     )
 }
