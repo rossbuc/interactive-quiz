@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import QuestionContainer from '../containers/QuestionContainer'
+import EndOfQuiz from '../components/EndOfQuiz'
 
 const QuizContainer = () => {
 
@@ -34,15 +35,7 @@ const QuizContainer = () => {
         setScore(0)
     }
 
-    const endOfQuiz = () => {
-        return (
-            <>
-                <h2>Congratulations you've finished the quiz</h2>
-                <h2>Your score is {score}</h2>
-                <button onClick={resetQuiz}>Restart</button>
-            </>
-        )
-    }
+
 
     const handleAnswer = (event) => {
         event.preventDefault()
@@ -57,16 +50,18 @@ const QuizContainer = () => {
         <>
             <div className="question-container">
                 <h3>Score: {score}</h3>
-                <QuestionContainer 
+                {(currentQuestionIndex == questions.length) 
+                    ? <EndOfQuiz score={score} resetQuiz={resetQuiz}/>
+                    : <QuestionContainer 
                     questions={questions} 
                     currentQuestionIndex={currentQuestionIndex} 
                     selectedAnswer={selectedAnswer}
                     feedback={feedback} 
                     setSelectedAnswer={setSelectedAnswer} 
                     handleAnswer={handleAnswer} 
-                    endOfQuiz={endOfQuiz}
-                    setFeedback={setFeedback}
-                />
+                    setFeedback={setFeedback}/>
+                }
+                
             </div>
         </>
     )
