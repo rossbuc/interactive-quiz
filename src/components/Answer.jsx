@@ -17,3 +17,8 @@ const Answer = ({index, option, selectedAnswer, setSelectedAnswer}) => {
 }
 
 export default Answer
+
+
+// pass answer all the way down here
+// first reneder the correct and incorrect answers to check it works 
+// then conditionally render
